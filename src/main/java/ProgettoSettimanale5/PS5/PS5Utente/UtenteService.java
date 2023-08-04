@@ -15,7 +15,6 @@ public class UtenteService {
     @Autowired
     public UtenteService(UtenteRepository utRep) {this.utenteRepository = utRep;}
 
-    @GetMapping()
     public List<Utente> getUtenti(){
         return utenteRepository.findAll();
     }
@@ -32,5 +31,13 @@ public class UtenteService {
 //            throw new IllegalStateException("email exist");
 //        });
 //        utenteRepository.save(body);
+    }
+
+    public void deleteUtente(Long id) {
+        utenteRepository.deleteById(id);
+    }
+
+    public Utente getUtenteById(Long id) {
+        return utenteRepository.findById(id).orElse(null);
     }
 }

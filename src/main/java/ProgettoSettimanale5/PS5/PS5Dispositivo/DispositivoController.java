@@ -1,14 +1,14 @@
 package ProgettoSettimanale5.PS5.PS5Dispositivo;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/dispositivi")
+@RequestMapping("/api/dispositivi")
 public class DispositivoController {
 
     public final DispositivoService dispSrv;
@@ -23,5 +23,27 @@ public class DispositivoController {
         return dispSrv.getDispositivi();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Dispositivo> getDispositivoById(@PathVariable Long id) {
+        Dispositivo dispositivo = dispSrv.getDispositivoById(id);
+
+        if (dispositivo != null) {
+            return new ResponseEntity<>(dispositivo, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteDispositivo(@PathVariable Long id) {
+        dispSrv.deleteDispositivo(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping
+    public ResponseEntity<Dispositivo> saveDispositivo(@RequestBody Dispositivo dispositivo) {
+        Dispositivo savedDispositivo = dispSrv.saveDispositivo(dispositivo);
+        return new ResponseEntity<>(savedDispositivo, HttpStatus.CREATED);
+    }
 
 }

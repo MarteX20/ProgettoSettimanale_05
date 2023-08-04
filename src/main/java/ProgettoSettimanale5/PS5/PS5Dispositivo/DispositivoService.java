@@ -9,11 +9,26 @@ import java.util.List;
 @Service
 public class DispositivoService {
 
-    @Autowired
-    DispositivoRepository repository;
+    private final DispositivoRepository dispRepository;
 
-    @GetMapping
+    @Autowired
+    public DispositivoService(DispositivoRepository dispRepository) {
+        this.dispRepository = dispRepository;
+    }
+
     public List<Dispositivo> getDispositivi() {
-        return repository.findAll();
+        return dispRepository.findAll();
+    }
+
+    public Dispositivo getDispositivoById(Long id) {
+        return dispRepository.findById(id).orElse(null);
+    }
+
+    public Dispositivo saveDispositivo(Dispositivo dispositivo) {
+        return dispRepository.save(dispositivo);
+    }
+
+    public void deleteDispositivo(Long id) {
+        dispRepository.deleteById(id);
     }
 }
