@@ -28,6 +28,7 @@ public class Dispositivo {
 	private StatoDispositivo stato;
 
 	@ManyToOne
+	@JoinColumn(name = "utente_id")
 	private Utente utente;
 
 }

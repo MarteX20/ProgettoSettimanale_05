@@ -1,6 +1,7 @@
 package ProgettoSettimanale5.PS5.PS5Utente;
 
 import ProgettoSettimanale5.PS5.PS5Dispositivo.Dispositivo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,7 +16,9 @@ import java.util.List;
 @ToString
 public class Utente {
 
-
+    @OneToMany(mappedBy = "utente")
+    @JsonIgnore
+    private List<Dispositivo> dispAssegnato;
 
     @Id
     @SequenceGenerator(name = "utente_sequence", sequenceName = "utente_sequence", allocationSize = 1)
@@ -37,8 +40,7 @@ public class Utente {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @OneToMany(mappedBy = "utente")
-    private List<Dispositivo> dispAssegnato;
+
 
     public Utente(String userName, String nome, String cognome, String password, String email) {
         this.userName = userName;
