@@ -1,5 +1,6 @@
 package ProgettoSettimanale5.PS5.PS5Dispositivo;
 
+import ProgettoSettimanale5.PS5.PS5Utente.Utente;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,5 +26,8 @@ public class Dispositivo {
 	@Column(nullable = false, name = "stato")
 	@Enumerated(EnumType.STRING)
 	private StatoDispositivo stato;
-	
+
+	@ManyToOne
+	private Utente utente;
+
 }

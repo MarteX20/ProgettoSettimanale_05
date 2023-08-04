@@ -9,4 +9,5 @@ public class Ps5Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Ps5Application.class, args);
 	}
+
 }

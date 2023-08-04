@@ -1,7 +1,6 @@
 package ProgettoSettimanale5.PS5.PS5Utente;
 
 
-import ProgettoSettimanale5.PS5.PS5Dispositivo.Dispositivo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +20,10 @@ public class UtenteController {
     }
 
     @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    public List<Utente> getUtenti() {return utSrv.getUtenti();}
+    public ResponseEntity<List<Utente>> getAllUtenti() {
+        List<Utente> utenti = utSrv.getUtenti();
+        return new ResponseEntity<>(utenti, HttpStatus.OK);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Utente> getUtenteById(@PathVariable Long id) {

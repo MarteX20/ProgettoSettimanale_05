@@ -1,7 +1,10 @@
 package ProgettoSettimanale5.PS5.PS5Utente;
 
+import ProgettoSettimanale5.PS5.PS5Dispositivo.Dispositivo;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Table(name="utenti")
@@ -11,6 +14,8 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 public class Utente {
+
+
 
     @Id
     @SequenceGenerator(name = "utente_sequence", sequenceName = "utente_sequence", allocationSize = 1)
@@ -32,6 +37,9 @@ public class Utente {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @OneToMany(mappedBy = "utente")
+    private List<Dispositivo> dispAssegnato;
+
     public Utente(String userName, String nome, String cognome, String password, String email) {
         this.userName = userName;
         this.nome = nome;
@@ -39,4 +47,6 @@ public class Utente {
         this.password = password;
         this.email = email;
     }
+
+
 }

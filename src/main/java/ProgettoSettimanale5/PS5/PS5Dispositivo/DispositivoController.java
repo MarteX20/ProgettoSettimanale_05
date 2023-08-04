@@ -11,7 +11,7 @@ import java.util.List;
 @RequestMapping("/api/dispositivi")
 public class DispositivoController {
 
-    public final DispositivoService dispSrv;
+    private final DispositivoService dispSrv;
 
     @Autowired
     public DispositivoController(DispositivoService dispSrv) {
@@ -19,8 +19,9 @@ public class DispositivoController {
     }
 
     @GetMapping
-    public List<Dispositivo> getDispositivi() {
-        return dispSrv.getDispositivi();
+    public ResponseEntity<List<Dispositivo>> getAllDispositivi() {
+        List<Dispositivo> dispositivi = dispSrv.getDispositivi();
+        return new ResponseEntity<>(dispositivi, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
@@ -57,5 +58,11 @@ public class DispositivoController {
         Dispositivo savedDispositivo = dispSrv.saveDispositivo(dispositivo);
         return new ResponseEntity<>(savedDispositivo, HttpStatus.CREATED);
     }
+
+//    @PutMapping("/{dId}/assegna/{uId}")
+//    public ResponseEntity<String> assegnaDispositivo(@PathVariable Long dId, @PathVariable Long uId) {
+//        String result = assegnaService.assegnaDispositivo(uId, dId);
+//        return ResponseEntity.ok(result);
+//    }
 
 }
