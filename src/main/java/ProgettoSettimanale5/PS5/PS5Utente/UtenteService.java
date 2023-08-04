@@ -40,4 +40,8 @@ public class UtenteService {
     public Utente getUtenteById(Long id) {
         return utenteRepository.findById(id).orElse(null);
     }
+
+    public Utente saveUtente(Utente utente) {
+        return utenteRepository.save(utente);
+    }
 }

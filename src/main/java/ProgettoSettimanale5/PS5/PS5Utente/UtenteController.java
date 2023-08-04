@@ -21,6 +21,7 @@ public class UtenteController {
     }
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<Utente> getUtenti() {return utSrv.getUtenti();}
 
     @GetMapping("/{id}")
@@ -35,11 +36,24 @@ public class UtenteController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.OK)
     public void addUtente(@RequestBody Utente utente){ utSrv.addUtente(utente);}
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUtente(@PathVariable Long id) {
         utSrv.deleteUtente(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Utente> updateUtente(@PathVariable Long id, @RequestBody Utente utente) {
+        Utente existingUtente = utSrv.getUtenteById(id);
+        if (existingUtente != null) {
+            utente.setId(id);
+            Utente updatedUtente = utSrv.saveUtente(utente);
+            return new ResponseEntity<>(updatedUtente, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }
