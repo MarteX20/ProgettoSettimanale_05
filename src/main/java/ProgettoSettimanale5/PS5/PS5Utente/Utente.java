@@ -1,4 +1,4 @@
-package ProgettoSettimanale5.PS5Utente;
+package ProgettoSettimanale5.PS5.PS5Utente;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -30,4 +30,12 @@ public class Utente {
 
     @Column(nullable = false, unique = true)
     private String email;
+
+    public Utente(String userName, String nome, String cognome, String password, String email) {
+        this.userName = userName;
+        this.nome = nome;
+        this.cognome = cognome;
+        this.password = password;
+        this.email = email;
+    }
 }

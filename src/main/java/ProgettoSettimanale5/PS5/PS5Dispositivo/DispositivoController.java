@@ -1,4 +1,4 @@
-package ProgettoSettimanale5.PS5Dispositivo;
+package ProgettoSettimanale5.PS5.PS5Dispositivo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,4 +22,6 @@ public class DispositivoController {
     public List<Dispositivo> getDispositivi() {
         return dispSrv.getDispositivi();
     }
+
+
 }
