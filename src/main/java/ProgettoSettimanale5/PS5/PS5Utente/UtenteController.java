@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/utenti")
+@RequestMapping(path = "/api/utenti")
 public class UtenteController {
 
     private final UtenteService utSrv;
@@ -21,5 +21,5 @@ public class UtenteController {
     public List<Utente> getUtenti() {return utSrv.getUtenti();}
 
     @PostMapping
-    public void addUtente(@RequestBody UtenteRequestPayload utentePayload){ utSrv.addUtente(utentePayload);}
+    public void addUtente(@RequestBody Utente utente){ utSrv.addUtente(utente);}
 }

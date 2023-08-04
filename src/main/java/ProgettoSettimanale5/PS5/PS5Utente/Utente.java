@@ -1,18 +1,19 @@
 package ProgettoSettimanale5.PS5.PS5Utente;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name="utenti")
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Utente {
 
     @Id
+    @SequenceGenerator(name = "utente_sequence", sequenceName = "utente_sequence", allocationSize = 1)
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 

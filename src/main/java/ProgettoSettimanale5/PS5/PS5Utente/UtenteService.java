@@ -10,26 +10,27 @@ import java.util.Optional;
 @Service
 public class UtenteService {
 
-    private final UtenteRepository utenteRepositoryRep;
+    private final UtenteRepository utenteRepository;
 
     @Autowired
-    public UtenteService(UtenteRepository utRep) {this.utenteRepositoryRep = utRep;}
+    public UtenteService(UtenteRepository utRep) {this.utenteRepository = utRep;}
 
     @GetMapping()
     public List<Utente> getUtenti(){
-        return utenteRepositoryRep.findAll();
+        return utenteRepository.findAll();
     }
 
-    public void addUtente(UtenteRequestPayload body) {
-        utenteRepositoryRep.findByEmail(body.getEmail()).ifPresent(utente -> {
+    public void addUtente(Utente ut) {
+        Optional<Utente> utenteOptional = utenteRepository.findUtenteByEmail(ut.getEmail());
+        if(utenteOptional.isPresent()){
             throw new IllegalStateException("email exist");
-        });
-        Utente newUtente = new Utente(body.getUserName(), body.getNome(), body.getCognome(), body.getPassword(), body.getEmail());
+        }
+        utenteRepository.save(ut);
 
-//        if(utenteOptional.isPresent()){
+
+//        utenteRepository.findUtenteByEmail(body.getEmail()).ifPresent(utente -> {
 //            throw new IllegalStateException("email exist");
-//        }else{
-//            utenteRepositoryRep.save(utentePayload);
-//        }
+//        });
+//        utenteRepository.save(body);
     }
 }
