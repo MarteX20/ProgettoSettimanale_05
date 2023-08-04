@@ -34,6 +34,18 @@ public class DispositivoController {
         }
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Dispositivo> updateDispositivo(@PathVariable Long id, @RequestBody Dispositivo dispositivo) {
+        Dispositivo existingDispositivo = dispSrv.getDispositivoById(id);
+        if (existingDispositivo != null) {
+            dispositivo.setId_dispositivo(id);
+            Dispositivo updatedDispositivo = dispSrv.saveDispositivo(dispositivo);
+            return new ResponseEntity<>(updatedDispositivo, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteDispositivo(@PathVariable Long id) {
         dispSrv.deleteDispositivo(id);
